@@ -4,7 +4,8 @@ experiment: sim # default sim
 # spliting
 seed_data_split: [0, 1, 2, 3, 4] # for 5-fold evaluation 要使用这种格式，必须用--multi-run选项
 # seed_data_split: 0 # for 5-fold evaluation
-path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}.npz
+# path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}.npz
+path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}-ljh.npz #自己分split
 
 # data
 dataset_name: tcga_brca
@@ -41,7 +42,8 @@ seed: 42
 dims: 1024-384-384-4 # dims: input-emb-hid-output
 
 # output
-save_path: ./results-brca-hier/reproducing_dsca_ljh # ss
+# save_path: ./results-brca-hier/reproducing_dsca_ljh # ss
+save_path: ./results-brca-hier/reproducing_dsca_ljh_ownSplit # ss 用自己的split
 #修改输出路径
 save_prediction: True
 

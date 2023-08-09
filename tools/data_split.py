@@ -20,7 +20,8 @@ def to_patient_data(df, at_column='patient_id'):
 
 def main(dataset, seed):
     seed_everything(seed)
-    df = pd.read_csv('../data_split/{}/{}_path_full.csv'.format(dataset, dataset))
+    # df = pd.read_csv('../data_split/{}/{}_path_full.csv'.format(dataset, dataset))
+    df = pd.read_csv('../data_split/{}/{}_path_full_ljh.csv'.format(dataset, dataset))#自己分split
     df = to_patient_data(df)
     sample_idx = np.arange(len(df))
     # 5-fold
@@ -34,12 +35,16 @@ def main(dataset, seed):
         val_ids = list(df.loc[val_index, 'patient_id'])
         test_ids = list(df.loc[test_index, 'patient_id'])
         # save patients to files
-        np.savez('../data_split/{}/{}-seed{}-fold{}.npz'.format(dataset, dataset, seed, fold),
+        # np.savez('../data_split/{}/{}-seed{}-fold{}.npz'.format(dataset, dataset, seed, fold),
+               # train_patients=train_ids, val_patients=val_ids, test_patients=test_ids)
+        np.savez('../data_split/{}/{}-seed{}-fold{}-ljh.npz'.format(dataset, dataset, seed, fold),
                train_patients=train_ids, val_patients=val_ids, test_patients=test_ids)
         fold += 1
 
 # python3 data_split.py nlst/tcga_brca 42
 if __name__ == '__main__':
-    dataset = sys.argv[1]
-    seed = int(sys.argv[2])
+    # dataset = sys.argv[1]
+    dataset = 'tcga_brca'
+    # seed = int(sys.argv[2])
+    seed = 54
     main(dataset, seed)
