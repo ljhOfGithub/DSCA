@@ -2,19 +2,32 @@ task: HierSurv # use low and high resolutions (dual stream)
 experiment: sim # default sim
 
 # spliting
-seed_data_split: [0, 1, 2, 3, 4] # for 5-fold evaluation
+seed_data_split: [0, 1, 2, 3, 4] # for 5-fold evaluation 要使用这种格式，必须用--multi-run选项
+# seed_data_split: 0 # for 5-fold evaluation
 path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}.npz
 
 # data
 dataset_name: tcga_brca
 magnification: x5_x20 # default setting, using low and high resolutions
-path_patchx20: /NAS02/ExpData/tcga_brca/feats-l1-s256-RN50-color_norm/pt_files
-path_patchx5: /NAS02/ExpData/tcga_brca/feats-l2-s256-RN50-color_norm/pt_files
-path_coordx5: /NAS02/ExpData/tcga_brca/tiles-l2-s256/patches
-path_label: ./data_split/tcga_brca/tcga_brca_path_full.csv
+# path_patchx20: /NAS02/ExpData/tcga_brca/feats-l1-s256-RN50-color_norm/pt_files
+# path_patchx20: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/feats-l1-s256-RN50-color_norm/pt_files
+path_patchx20: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/copy/feats-l1-s256-RN50-color_norm/pt_files
+#x20高分辨率 正则化后的
+# path_patchx5: /NAS02/ExpData/tcga_brca/feats-l2-s256-RN50-color_norm/pt_files
+# path_patchx5: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/feats-l2-s256-RN50-color_norm/pt_files
+path_patchx5: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/copy/feats-l2-s256-RN50-color_norm/pt_files
+#x5低分辨率 正则化后的
+# path_coordx5: /NAS02/ExpData/tcga_brca/tiles-l2-s256/patches
+# path_coordx5: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/tiles-l2-s256/patches
+path_coordx5: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/copy/tiles-l2-s256/patches
+#低分辨率的patches
+# path_label: ./data_split/tcga_brca/tcga_brca_path_full.csv
+path_label: /home/jupyter-ljh/data/mydata/DSCA-main/data_split/tcga_brca/tcga_brca_path_full_ljh.csv
+#先沿用
 label_discrete: True # default setting
 bins_discrete: 4 # default setting, bins to divide survival times
 feat_format: pt # default setting, the format of files storing patch features
+#特征文件的格式
 num_patch_sampling: -1 # not sampling patches
 
 # CUDA
@@ -28,7 +41,8 @@ seed: 42
 dims: 1024-384-384-4 # dims: input-emb-hid-output
 
 # output
-save_path: ./results-brca-hier/reproducing_dsca # ss
+save_path: ./results-brca-hier/reproducing_dsca_ljh # ss
+#修改输出路径
 save_prediction: True
 
 # Patch Embedding
@@ -60,8 +74,11 @@ reg_l1: 0.00001
 
 # training (default setting)
 batch_size: 1
-num_workers: 8
+# num_workers: 8
+num_workers: 0
 epochs: 150
+# epochs: 3
+#方便调试
 bp_every_iters: 16
 monitor_metrics: loss
 es_patience: 30

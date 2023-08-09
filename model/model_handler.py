@@ -253,6 +253,8 @@ class MyHandler(object):
 
                 # 2.3 backwards gradients and update networks
                 loss.backward()
+                import pdb
+                # pdb.set_trace()
                 self.optimizer.step()
                 torch.cuda.empty_cache()
                 

@@ -67,6 +67,8 @@ def create_optimizer(args, model, filter_bias_and_bn=True):
 
     opt_split = opt_lower.split('_')
     opt_lower = opt_split[-1]
+    import pdb
+    # pdb.set_trace()
     if opt_lower == 'sgd' or opt_lower == 'nesterov':
         opt_args.pop('eps', None)
         optimizer = optim.SGD(parameters, momentum=args.momentum, nesterov=True, **opt_args)

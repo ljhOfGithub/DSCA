@@ -85,7 +85,8 @@ def grid(kwargs):
         for e in v:
             copy_v.append(MncDc(e) if isinstance(e, tuple) else e)
         sin[k] = copy_v
-
+    import pdb
+    # pdb.set_trace()
     grd = np.array(np.meshgrid(*sin.values()), dtype=object).T.reshape(-1, len(sin.values()))
     return [merge_dicts(
         {k: v for k, v in kwargs.items() if not isinstance(v, list)},

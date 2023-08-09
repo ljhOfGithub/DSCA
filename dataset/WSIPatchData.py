@@ -72,6 +72,8 @@ class SurvLabelTransformer(object):
         sel_pids, pid2sids, pid2label = list(), dict(), dict()
         for pid in pids:
             sel_idxs = self.full_data[self.full_data['patient_id'] == pid].index
+            import pdb
+            # pdb.set_trace()
             if len(sel_idxs) > 0:
                 sel_pids.append(pid)
                 pid2sids[pid] = list(self.full_data.loc[sel_idxs, 'pathology_id'])
@@ -139,6 +141,8 @@ class WSIPatchDataset(Dataset):
         feats_x5  = torch.cat(feats_x5,  dim=0).to(torch.float)
         coors_x5  = torch.cat(coors_x5,  dim=0).to(torch.int32)
         assert coors_x5.shape[0] == feats_x5.shape[0]
+        import pdb
+        # pdb.set_trace()
         assert feats_x20.shape[0] == 16 * feats_x5.shape[0]
 
         y = torch.Tensor(self.pid2label[pid]).to(torch.float)
