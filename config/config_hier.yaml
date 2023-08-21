@@ -5,7 +5,8 @@ experiment: sim # default sim
 seed_data_split: [0, 1, 2, 3, 4] # for 5-fold evaluation 要使用这种格式，必须用--multi-run选项
 # seed_data_split: 0 # for 5-fold evaluation
 # path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}.npz
-path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}-ljh.npz #自己分split
+# path_data_split: ./data_split/tcga_brca/tcga_brca-seed54-fold{}-ljh.npz #自己分split
+path_data_split: ./data_split/tcga_brca_ljh/tcga_brca-seed54-fold{}-ljh.npz #自己分split
 
 # data
 dataset_name: tcga_brca
@@ -23,7 +24,7 @@ path_patchx5: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/copy/feats
 path_coordx5: /home/jupyter-ljh/data/mntdata/data0/LI_jihao/DSCA-BRCA/copy/tiles-l2-s256/patches
 #低分辨率的patches
 # path_label: ./data_split/tcga_brca/tcga_brca_path_full.csv
-path_label: /home/jupyter-ljh/data/mydata/DSCA-main/data_split/tcga_brca/tcga_brca_path_full_ljh.csv
+path_label: /home/jupyter-ljh/data/mydata/DSCA-main/data_split/tcga_brca_ljh/tcga_brca_path_full_ljh.csv
 #先沿用
 label_discrete: True # default setting
 bins_discrete: 4 # default setting, bins to divide survival times
@@ -43,7 +44,9 @@ dims: 1024-384-384-4 # dims: input-emb-hid-output
 
 # output
 # save_path: ./results-brca-hier/reproducing_dsca_ljh # ss
-save_path: ./results-brca-hier/reproducing_dsca_ljh_ownSplit # ss 用自己的split
+# save_path: ./results-brca-hier/reproducing_dsca_ljh_ownSplit # ss 用自己的split
+# save_path: ./results-brca/ljh # ss 用自己的split 实际的目录./results-brca
+save_path: ./results-brca-2/ # ss 用自己的split
 #修改输出路径
 save_prediction: True
 
@@ -78,8 +81,8 @@ reg_l1: 0.00001
 batch_size: 1
 # num_workers: 8
 num_workers: 0
-epochs: 150
-# epochs: 3
+# epochs: 150
+epochs: 3
 #方便调试
 bp_every_iters: 16
 monitor_metrics: loss

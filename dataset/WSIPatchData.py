@@ -71,17 +71,23 @@ class SurvLabelTransformer(object):
 
         sel_pids, pid2sids, pid2label = list(), dict(), dict()
         for pid in pids:
+            if pid == 'nan':
+                continue
             sel_idxs = self.full_data[self.full_data['patient_id'] == pid].index
             import pdb
             # pdb.set_trace()
             if len(sel_idxs) > 0:
                 sel_pids.append(pid)
                 pid2sids[pid] = list(self.full_data.loc[sel_idxs, 'pathology_id'])
-                
                 pat_idx = self.pat_data[self.pat_data['patient_id'] == pid].index[0]
                 pid2label[pid] = list(self.pat_data.loc[pat_idx, column_label])
             else:
                 print('[warning] patient {} not found!'.format(pid))
+                import pprint
+                current_locals = locals()
+                with open('./variables.txt', 'w') as f:
+                    pprint.pprint(current_locals, stream=f)
+
 
         return sel_pids, pid2sids, pid2label
 
